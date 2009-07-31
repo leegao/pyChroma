@@ -1,0 +1,19 @@
+@author: Lee Gao
+@contact: http://6.dot.ch/
+@note:
+    This is a re-implementation of mattt*'s Chroma-Hash calculator.
+    http://mattt.me/2009/07/chroma-hash-a-belated-introduction/
+@param param: 
+    password: The password to chroma-hash
+    default: The number of colors to return
+    _hash: If the password is already hashed by another algorithm or is
+           already a MD5 hash, then the _hash function (which takes only one parameter)
+           will return a MD5 compatible hash
+           SHA1 will be implemented when mattt decides to update his Chroma-Hash specs
+@return: 
+    chroma object with 1-4 HTML color items.
+@ivar ivar:
+    chroma.colors - array of the chroma-hashed colors
+Example:    
+    from Chroma import chroma
+    myColors = chroma("password")
