@@ -1,19 +1,32 @@
-@author: Lee Gao
-@contact: http://6.dot.ch/
-@note:
-    This is a re-implementation of mattt*'s Chroma-Hash calculator.
-    http://mattt.me/2009/07/chroma-hash-a-belated-introduction/
-@param param: 
-    password: The password to chroma-hash
-    default: The number of colors to return
-    _hash: If the password is already hashed by another algorithm or is
-           already a MD5 hash, then the _hash function (which takes only one parameter)
-           will return a MD5 compatible hash
-           SHA1 will be implemented when mattt decides to update his Chroma-Hash specs
-@return: 
-    chroma object with 1-4 HTML color items.
-@ivar ivar:
-    chroma.colors - array of the chroma-hashed colors
-Example:    
-    from Chroma import chroma
-    myColors = chroma("password")
+author: Lee Gao
+contact: http://6.dot.ch/
+
+pyChroma is based on mattt's chroma-hash experiment. 
+It got me to think - what if we could use this as a re-authentication technique instead of the default?
+Well the end product is pyChroma, which currently supports SHA1 and MD5 algorithms and can be integrated with vBulletin
+and Django backends (the authentication platform).
+
+Basic Usage:
+
+	
+	from Chroma import chroma
+	
+	obj = chroma("sha1$a1976$a36cc8cbf81742a8fb52e221aaeab48ed7f58ab4", 
+		alg = "SHA", 
+		backend = "django") # A django-authentication styled backend via SHA1 digest
+	
+	str(obj) # The hashed colors
+	obj.javascript # Complete frontend javascript for Chroma-Hash including the algorithm
+	
+	obj.md5_js # the hex_md5 javascript function
+	obj.sha_js # the hex_sha1 javascript function
+	obj.engine # the digest engine
+	obj.jsengine # the javascript digest engine
+	obj.frontend # the method for returning the hash
+	obj.salt # the extracted salt for the digest algorithm
+	
+
+Revisions
+
+v2 - Automates the generation of the javascript + Added support for Django and vBulletin backends and all of the js dependencies (cept for jquery)
+v1 - Enables basic hashing
